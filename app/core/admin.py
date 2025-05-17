@@ -25,8 +25,8 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'email', 
-                'password1', 
+                'email',
+                'password1',
                 'password2',
                 'is_active',
                 'is_staff',
@@ -34,5 +34,6 @@ class UserAdmin(BaseUserAdmin):
             )
         }),
     )
+
 
 admin.site.register(models.User, UserAdmin)
