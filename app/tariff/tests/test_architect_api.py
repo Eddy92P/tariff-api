@@ -14,9 +14,11 @@ from tariff.serializers import ArchitectSerializer
 
 ARCHITECT_URL = reverse('tariff:architect-list')
 
+
 def architect_detail_url(architect_id):
     """Return architect detail URL."""
     return reverse('tariff:architect-detail', args=[architect_id])
+
 
 def create_architect(**params):
     """Create and return a sample architect."""
@@ -31,6 +33,7 @@ def create_architect(**params):
 
     defaults.update(params)
     return Architect.objects.create(**defaults)
+
 
 def create_user(**params):
     """Create and return a sample user."""
@@ -55,13 +58,24 @@ class PrivateArchitectAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user(email='example@test.com', password='testpass123')
+        self.user = create_user(
+            email='example@test.com',
+            password='testpass123'
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_retrieve_architects(self):
         """Test retrieving a list of architects."""
-        create_architect(register_number='123456', phone_number='65689875' , ci='12345678')
-        create_architect(register_number='1234567', phone_number='65689876' , ci='12345679')
+        create_architect(
+            register_number='123456',
+            phone_number='65689875',
+            ci='12345678'
+        )
+        create_architect(
+            register_number='1234567',
+            phone_number='65689876',
+            ci='12345679'
+        )
 
         res = self.client.get(ARCHITECT_URL)
 

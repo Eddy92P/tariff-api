@@ -15,6 +15,7 @@ from tariff.serializers import HeaderTariffSerializer
 
 TARIFF_URL = reverse('tariff:header_tariff-list')
 
+
 def create_architect(**params):
     """Create and return a sample architect."""
     defaults = {
@@ -28,6 +29,7 @@ def create_architect(**params):
     defaults.update(params)
     return Architect.objects.create(**defaults)
 
+
 def create_header_tariff(architect=None, **params):
     """Create and return a sample header tariff."""
     defaults = {
@@ -40,6 +42,7 @@ def create_header_tariff(architect=None, **params):
 
     return Header_Tariff.objects.create(architect=architect, **defaults)
 
+
 def create_project(**params):
     """Create and return a sample project."""
     defaults = {
@@ -50,6 +53,7 @@ def create_project(**params):
     defaults.update(params)
 
     return Project.objects.create(**defaults)
+
 
 def create_tariff(**params):
     """Create and return a sample tariff."""
@@ -82,7 +86,10 @@ class PrivateTariffAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = get_user_model().objects.create_user(email='example@test.com', password='testpass123')
+        self.user = get_user_model().objects.create_user(
+            email='example@test.com',
+            password='testpass123'
+        )
         self.client.force_authenticate(user=self.user)
         self.architect = create_architect()
         self.project = create_project()

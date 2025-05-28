@@ -14,9 +14,11 @@ from tariff.serializers import ProjectSerializer
 
 PROJECT_URL = reverse('tariff:project-list')
 
+
 def detail_url(project_id):
     """Return tariff detail URL."""
     return reverse('tariff:project-detail', args=[project_id])
+
 
 def create_project(**params):
     """Create and return a sample project."""
@@ -28,6 +30,7 @@ def create_project(**params):
     defaults.update(params)
 
     return Project.objects.create(**defaults)
+
 
 def create_user(**params):
     """Create and return a sample user."""
@@ -52,7 +55,10 @@ class PrivateProjectAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user(email='example@test.com', password='testpass123')
+        self.user = create_user(
+            email='example@test.com',
+            password='testpass123'
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_retrieve_projects(self):

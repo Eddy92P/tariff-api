@@ -13,13 +13,14 @@ def create_project(
         name='Test Project',
         cost=Decimal('1000.00'),
         percentaje_visa=0.0
-    ):
+):
     """Create and returns a project."""
     return models.Project.objects.create(
         name=name,
         cost=cost,
         percentaje_visa=percentaje_visa
     )
+
 
 def create_architect(
         name='Test',
@@ -28,7 +29,7 @@ def create_architect(
         register_number='1234567',
         phone_number='65897813',
         ci='12345679',
-    ):
+):
     """Create and returns an architect."""
     return models.Architect.objects.create(
         name=name,
@@ -39,18 +40,18 @@ def create_architect(
         ci=ci
     )
 
+
 def create_header_tariff(
         total_tariff_amount=Decimal('500.00'),
         tariff_date='2023-10-01',
         architect=None
-    ):
+):
     """Create and returns a header tariff."""
     return models.Header_Tariff.objects.create(
         total_tariff_amount=total_tariff_amount,
         tariff_date=tariff_date,
         architect=architect
     )
-
 
 
 class ModelTests(TestCase):
@@ -94,21 +95,21 @@ class ModelTests(TestCase):
 
     def test_create_project(self):
         """Test creating a project."""
-        
         project = create_project()
 
         self.assertEqual(str(project), f"{project.name}")
 
     def test_create_architect(self):
         """Test creating an architect."""
-        
         architect = create_architect()
 
-        self.assertEqual(str(architect), f"{architect.name} {architect.last_name}")
+        self.assertEqual(
+            str(architect), 
+            f"{architect.name} {architect.last_name}"
+        )
 
     def test_create_header_tariff(self):
         """Test creating a header tariff."""
-        
         architect = create_architect()
         header_tariff = create_header_tariff(architect=architect)
 
@@ -123,7 +124,6 @@ class ModelTests(TestCase):
 
     def test_tariff(self):
         """Test creating a tariff."""
-        
         project = create_project()
         architect = create_architect()
         header_tariff = create_header_tariff(architect=architect)
@@ -131,12 +131,12 @@ class ModelTests(TestCase):
         tariff = models.Tariff.objects.create(
             surface = Decimal('100.00'),
             have_visa = True,
-            project=project,
-            header=header_tariff
+            project = project,
+            header = header_tariff
         )
 
         self.assertEqual(
-            str(tariff), 
+            str(tariff),
             (
                 f"Tariff for {tariff.project.name} "
                 f"on {tariff.header.tariff_date}"

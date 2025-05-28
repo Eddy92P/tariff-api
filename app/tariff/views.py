@@ -20,7 +20,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieve the projects ordered."""
         return self.queryset.order_by('-id')
-    
+
 
 class ArchitectViewSet(viewsets.ModelViewSet):
     """Manage architect APIs"""
@@ -33,7 +33,7 @@ class ArchitectViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieve the architects ordered."""
         return self.queryset.order_by('-id')
-    
+
 
 class HeaderTariffViewSet(viewsets.ModelViewSet):
     """Manage header tariff APIs"""

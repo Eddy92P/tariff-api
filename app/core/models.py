@@ -49,7 +49,7 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-    
+
 
 class Architect(models.Model):
     """Architect model."""
@@ -62,11 +62,15 @@ class Architect(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.last_name}"
-    
+
 
 class Header_Tariff(models.Model):
     """"Header Tariff model."""
-    total_tariff_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    total_tariff_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0.0
+    )
     tariff_date = models.DateField()
     architect = models.ForeignKey(
         Architect,
@@ -75,8 +79,13 @@ class Header_Tariff(models.Model):
     )
 
     def __str__(self):
-        return f"Tariff on {self.tariff_date} by {self.architect.name} {self.architect.last_name}"
-    
+        return (
+            f"Tariff on {self.tariff_date} "
+            f"by {self.architect.name} "
+            f"{self.architect.last_name}"
+        )
+
+
 class Tariff(models.Model):
     """Tariff model."""
     header = models.ForeignKey(

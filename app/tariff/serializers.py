@@ -49,7 +49,13 @@ class HeaderTariffSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Header_Tariff
-        fields = ['id', 'total_tariff_amount', 'tariff_date', 'architect', 'tariffs']
+        fields = [
+            'id',
+            'total_tariff_amount',
+            'tariff_date',
+            'architect',
+            'tariffs'
+        ]
         read_only_fields = ['id']
 
     def create(self, validated_data):
@@ -67,6 +73,10 @@ class HeaderTariffSerializer(serializers.ModelSerializer):
         for tariff_data in tariffs_data:
             project_data = tariff_data.pop('project')
             project, _ = Project.objects.get_or_create(**project_data)
-            Tariff.objects.create(header=header, project=project, **tariff_data)
+            Tariff.objects.create(
+                header = header,
+                project = project,
+                **tariff_data
+            )
 
         return header
