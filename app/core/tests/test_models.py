@@ -104,7 +104,7 @@ class ModelTests(TestCase):
         architect = create_architect()
 
         self.assertEqual(
-            str(architect), 
+            str(architect),
             f"{architect.name} {architect.last_name}"
         )
 
@@ -129,10 +129,10 @@ class ModelTests(TestCase):
         header_tariff = create_header_tariff(architect=architect)
 
         tariff = models.Tariff.objects.create(
-            surface = Decimal('100.00'),
-            have_visa = True,
-            project = project,
-            header = header_tariff
+            surface=Decimal('100.00'),
+            have_visa=True,
+            project=project,
+            header=header_tariff
         )
 
         self.assertEqual(

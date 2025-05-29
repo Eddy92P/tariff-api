@@ -117,7 +117,7 @@ class PrivateProjectAPITests(TestCase):
             self.assertEqual(value, getattr(project, key))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-    def test_not_delete_project(self):  
+    def test_not_delete_project(self):
         """Test that project cannot be deleted via API."""
         project = create_project()
 

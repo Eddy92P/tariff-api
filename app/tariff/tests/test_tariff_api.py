@@ -95,7 +95,7 @@ class PrivateTariffAPITests(TestCase):
         self.project = create_project()
         self.header = create_header_tariff(architect=self.architect)
         self.tariff = create_tariff(header=self.header, project=self.project)
-        
+
     def test_retrieve_tariffs(self):
         """Test retrieving a list of headers with tariffs."""
         res = self.client.get(TARIFF_URL)

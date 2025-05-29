@@ -74,8 +74,8 @@ class HeaderTariffSerializer(serializers.ModelSerializer):
             project_data = tariff_data.pop('project')
             project, _ = Project.objects.get_or_create(**project_data)
             Tariff.objects.create(
-                header = header,
-                project = project,
+                header=header,
+                project=project,
                 **tariff_data
             )
 
