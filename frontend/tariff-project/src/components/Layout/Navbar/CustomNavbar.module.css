@@ -1,0 +1,39 @@
+.navBar {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    background-color: white !important;
+}
+
+.dropdown > a {
+    font-family: 'Lato', sans-serif;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown :global(.dropdown-menu) {
+    position: absolute;
+    transform: translateX(-70%) !important;
+    min-width: max-content;
+}
+
+.dropdown-item > * {
+    background-color: red !important;
+}
+
+.dropdown :global(.dropdown-item:hover) {
+    color: #3a9ff9;
+}
+
+@media (max-width: 991px) {
+    .dropdown {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .dropdown :global(.dropdown-menu) {
+        position: static !important;
+        transform: none !important;
+        width: 100%;
+    }
+}

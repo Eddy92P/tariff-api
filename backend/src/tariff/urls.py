@@ -16,4 +16,5 @@ app_name = 'tariff'
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('pdf/<int:id>/', views.PDFView.as_view(), name='tariff-pdf'),
 ]

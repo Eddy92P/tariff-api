@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{% static 'css/tariff.css' %}">
+    </head>
+    <body>
+        <div class="header-container">
+            <div class="header-title">
+                <h2>COLEGIO DE ARQUITECTOS DE POTOSI</h1>
+                <h3>Calle Ayacucho N°27-29 / Telf.-Fax 6226952</h3>
+                <h3>e-mail: carqpotosi@gmail.com</h3>
+                <h3>Web: colearqpotosi.com</h3>
+                <h2>POTOSI - BOLIVIA</h2>
+            </div>
+            <div class="header-second-title">
+                <h2>RECIBO OFICIAL DE INGRESOS</h1>
+                <h3>VISACION DE PLANOS</h2>
+                <h3>N° {{ tariff.id }}</h2>
+            </div>
+        </div>
+        <div class="header-concept">
+            <div>
+                <p>EL COLEGIO DE ARQUITECTOS A RECIBIDO DEL ARQ.: {{ tariff.architect.name }} {{ tariff.architect.last_name }}</p>
+                <p>LA SUMA DE: {{ tariff.total_tariff_amount }}</p>
+                <p>VISACION DE PLANO(S) DE LA(S) SIGUIENTES CARACTERISTICAS:</p>
+            </div>
+            <p>REG.: {{ tariff.architect.register_number }}</p>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>PLANO</th>
+                    <th>SUP. M^2</th>
+                    <th>PROPIETARIO</th>
+                    <th>IMPT</th>
+                </tr>
+                {% for tariff in tariff.tariffs.all %}
+                    <tr>
+                        <td>{{ tariff.project.name }}</td>
+                        <td>{{ tariff.surface }}</td>
+                        <td>EMPTY</td>
+                        <td>{{ tariff.tariff_amount }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="footer">
+            <div class="footer-container">
+                <div class="signature">
+                    <p>_______________________________</p>
+                    <p>ENTREGUE CONFORME</p>
+                    <p>NOMBRE: {{ tariff.architect.name }} {{ tariff.architect.last_name }}</p>
+                    <p>C.I.: {{ tariff.architect.ci }}</p>
+                </div>
+                <div class="signature">
+                    <p>_______________________________</p>
+                    <p>RECIBI CONFORME</p>
+                    <p>TESORERO</p>
+                    <p>COLEGIO DE ARQUITECTOS</p>
+                </div>
+            </div>
+            <div class="date-container">
+                <p>Potosi, {{ today|date:"j \\d\\e F \\d\\e Y"|lower }}</p>
+            </div>
+        </div>
+    </body>
+</html>

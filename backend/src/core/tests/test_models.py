@@ -132,13 +132,14 @@ class ModelTests(TestCase):
             surface=Decimal('100.00'),
             have_visa=True,
             project=project,
-            header=header_tariff
+            header=header_tariff,
+            tariff_amount=Decimal('100.00')
         )
 
         self.assertEqual(
             str(tariff),
             (
                 f"Tariff for {tariff.project.name} "
-                f"on {tariff.header.tariff_date}"
+                f"on {tariff.header.tariff_date} is {tariff.tariff_amount}"
             )
         )

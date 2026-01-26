@@ -43,7 +43,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Project(models.Model):
     """Project model."""
-    name = models.CharField(max_length=255)
+    name = models.CharField(
+        max_length=255, 
+        unique=True,
+        error_messages={
+            'unique': 'El proyecto ya existe.'
+        }
+    )
     cost = models.DecimalField(max_digits=10, decimal_places=2)
     percentaje_visa = models.FloatField(default=0.0, blank=False)
 
@@ -56,9 +62,28 @@ class Architect(models.Model):
     name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     address = models.CharField(max_length=255, blank=True)
-    register_number = models.CharField(max_length=50, unique=True)
-    phone_number = models.CharField(max_length=15, unique=True, blank=True)
-    ci = models.CharField(max_length=20, unique=True)
+    register_number = models.CharField(
+        max_length=50, 
+        unique=True,
+        error_messages={
+            'unique': 'El número de registro ya existe.'
+        }
+    )
+    phone_number = models.CharField(
+        max_length=15, 
+        unique=True, 
+        blank=True,
+        error_messages={
+            'unique': 'El número de teléfono ya existe.'
+        }
+    )
+    ci = models.CharField(
+        max_length=20, 
+        unique=True,
+        error_messages={
+            'unique': 'El número de CI ya existe.'
+        }
+    )
 
     def __str__(self):
         return f"{self.name} {self.last_name}"
@@ -100,6 +125,7 @@ class Tariff(models.Model):
     )
     surface = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     have_visa = models.BooleanField(default=False)
+    tariff_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     def __str__(self):
-        return f"Tariff for {self.project.name} on {self.header.tariff_date}"
+        return f"Tariff for {self.project.name} on {self.header.tariff_date} is {self.tariff_amount}"
